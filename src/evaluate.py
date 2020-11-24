@@ -27,7 +27,7 @@ def load_model_config(model_name) -> Dict:
 if __name__ == "__main__":
     parser = argparse.ArgumentParser()
     parser.add_argument("--seed", default=42, type=int)
-    parser.add_argument("--dataset", default="mall", type=str, help="Name of the dataset: 'mall', 'csfd', 'facebook', 'all'")
+    parser.add_argument("--dataset", default="mall", type=str, help="Name of the dataset, for example 'mall', 'csfd', 'facebook', 'all'")
     parser.add_argument("--model", default=None, type=str)
     parser.add_argument("--dropout", default=None, type=float)
     parser.add_argument("--weights_file", default=None, type=str)
@@ -86,7 +86,10 @@ if __name__ == "__main__":
 
     batch_size, buffer_size = train_config["batch_size"], train_config["buffer_size"]
 
-    class_weight = {int(k): v for k, v in train_config["class_weight"].items()}
+    if "class_weight" in train_config:
+        class_weight = {int(k): v for k, v in train_config["class_weight"].items()}
+    else:
+        class_weight = {int(k): 1 for k in range(classes)}
 
     loss = tf.keras.losses.CategoricalCrossentropy(from_logits=False)
     metrics = [

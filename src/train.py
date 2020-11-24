@@ -26,7 +26,7 @@ def load_model_config(model_name) -> Dict:
 if __name__ == "__main__":
     parser = argparse.ArgumentParser()
     parser.add_argument("--seed", default=42, type=int)
-    parser.add_argument("--dataset", default="csfd", type=str)
+    parser.add_argument("--dataset", default="mall", type=str)
     parser.add_argument("--model", default=None, type=str)
     parser.add_argument("--learning_rate", default=None, type=float)
     parser.add_argument("--dropout", default=None, type=float)
@@ -100,7 +100,10 @@ if __name__ == "__main__":
     optimizer_config = train_config["optimizer"]
     learning_rate, epsilon = optimizer_config["learning_rate"], optimizer_config["epsilon"]
 
-    class_weight = {int(k): v for k, v in train_config["class_weight"].items()}
+    if "class_weight" in train_config:
+        class_weight = {int(k): v for k, v in train_config["class_weight"].items()}
+    else:
+        class_weight = {int(k): 1 for k in range(classes)}
 
     optimizer = tf.keras.optimizers.Adam(learning_rate, epsilon)
     loss = tf.keras.losses.CategoricalCrossentropy(from_logits=False)

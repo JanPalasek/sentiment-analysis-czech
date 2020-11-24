@@ -5,7 +5,7 @@
     "max_sentence_len": 128,
     "model_config_name": "xlm_roberta"
   },
-  "path": "../data/custom",
+  "path": "../data/handpicked_test",
   "train": {
     "batch_size": 16,
     "buffer_size": 1000,

@@ -143,7 +143,6 @@ dmypy.json
 
 .idea/
 out/
-/data/
 logs
 
 src/train_cluster.sh

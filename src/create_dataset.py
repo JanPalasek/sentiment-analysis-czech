@@ -29,4 +29,6 @@ if __name__ == "__main__":
         data.all_dataset.preprocess(in_csv_paths, dir_path, val_split=0.15, test_split=0.15)
     elif args.dataset == "handpicked_test":
         data.review_dataset.preprocess(dir_path, val_split=0, test_split=1)
+    else:
+        data.facebook_dataset.preprocess(dir_path, val_split=0.15, test_split=0.15)
 
