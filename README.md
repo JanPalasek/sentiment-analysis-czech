@@ -1,10 +1,53 @@
 # sentiment-analysis-czech
 The most of NLP studies is performed using the english language. However, the rise of multilingual models allows us
 to perform them on other languages. I decided to test it. This project performs sentiment analysis, classifying
-sentences into three categories: negative, positive and neutral, using the recent, multi-lingual model, [xlm-roberta base](https://arxiv.org/pdf/1911.02116.pdf).
+sentences into three categories: negative, positive and neutral, using the recent, multi-lingual model: [xlm-roberta base](https://arxiv.org/pdf/1911.02116.pdf).
 
 The sentiment analysis is done on datasets from [https://github.com/kysely/sentiment-analysis-czech](https://github.com/kysely/sentiment-analysis-czech). The
 benchmarks will be done in the corresponding article soon.
+
+<table>
+    <tr>
+        <th></th>
+        <th>Target</th>
+        <th>Facebook</th>
+        <th>ČSFD</th>
+        <th>Mall.cz</th>
+        <th>All</th>
+    </tr>
+    <tr>
+        <td>Rozbila se po prvním použití, je na hovno!</td>
+        <td><img src="docs/negative.png" alt="negative" style="width: 30px;"/></td>
+        <td><img src="docs/negative.png" alt="negative" style="width: 30px;"/></td>
+        <td><img src="docs/negative.png" alt="negative" style="width: 30px;"/></td>
+        <td><img src="docs/positive.png" alt="positive" style="width: 30px;"/></td>
+        <td><img src="docs/negative.png" alt="negative" style="width: 30px;"/></td>
+    </tr>
+     <tr>
+        <td>S manželem jsme si víkend moc užili.</td>
+        <td><img src="docs/positive.png" alt="positive" style="width: 30px;"/></td>
+        <td><img src="docs/positive.png" alt="positive" style="width: 30px;"/></td>
+        <td><img src="docs/positive.png" alt="positive" style="width: 30px;"/></td>
+        <td><img src="docs/positive.png" alt="positive" style="width: 30px;"/></td>
+        <td><img src="docs/positive.png" alt="positive" style="width: 30px;"/></td>
+    </tr>
+    <tr>
+        <td>Ok, ale nic zajímavého.</td>
+        <td><img src="docs/neutral.png" alt="neutral" style="width: 30px;"/></td>
+        <td><img src="docs/neutral.png" alt="neutral" style="width: 30px;"/></td>
+        <td><img src="docs/neutral.png" alt="neutral" style="width: 30px;"/></td>
+        <td><img src="docs/negative.png" alt="negative" style="width: 30px;"/></td>
+        <td><img src="docs/neutral.png" alt="neutral" style="width: 30px;"/></td>
+    </tr>
+    <tr>
+        <td>Laskavě si tento výrobek strčte někam.</td>
+        <td><img src="docs/negative.png" alt="negative" style="width: 30px;"/></td>
+        <td><img src="docs/negative.png" alt="negative" style="width: 30px;"/></td>
+        <td><img src="docs/negative.png" alt="negative" style="width: 30px;"/></td>
+        <td><img src="docs/positive.png" alt="positive" style="width: 30px;"/></td>
+        <td><img src="docs/negative.png" alt="negative" style="width: 30px;"/></td>
+    </tr>
+</table>
 
 ## How to install the project
 Install the requirements using following script.
@@ -13,12 +56,10 @@ Install the requirements using following script.
 python -m pip install -r "requirements.txt"
 ```
 
-Furthermore, we consider *src* as the root directory in this tutorial.
-
 ### Requirements
 They are listed in *requirements.txt* file.
 
-- Python >= 3.6
+- Python 3.6 or higher
 - sklearn
 - huggingface/transformers
 - Tensorflow
@@ -32,8 +73,7 @@ There are 5 datasets available:
 4. *all* - contains merged datasets from *csfd, facebook* and *mall*,
 5. *handpicked_test* - contains list of handpicked tests used for analysis article.
 
-Those datasets can be found in corresponding directory in *data*. There are also predefined train/test/validation splits in order
-for the replication analysis to be easier (since seed generation works differently on different OS even using the same seed).
+Those datasets are expected to be in *data* directory. If need be, download it from the latest release. In the directories, there also are predefined train/test/validation splits in order for the replication analysis to be easier (since random data generation works differently on different OS even using the same seed).
 
 ### How to create my own dataset
 If you'd like to create a new dataset for sentiment analysis, create a new directory in *data* dir,
@@ -43,6 +83,7 @@ In order to use it in the training, we need to create 3 important csv files for 
 *data_val.csv* and *data_test.csv*. Their creation is handled by *create_dataset.py*.
 
 ```shell script
+# current directory is expected to be "src"
 python create_dataset.py --dataset="{DATASET_NAME}"
 ```
 
@@ -62,6 +103,7 @@ default parameters can be found in *config/model* directory.
 Training can be done using following shell script:
 
 ```shell script
+# current directory is expected to be "src"
 python train.py --dataset="{DATASET_NAME}"
 ```
 
@@ -69,6 +111,7 @@ In order to override default parameters specified by config files, you can send 
 script as the script parameters. For example
 
 ```shell script
+# current directory is expected to be "src"
 python train.py --dataset="{DATASET_NAME}" --model="bert" --dropout=0.1 --epochs=10
 ```
 
@@ -77,6 +120,7 @@ If the dataset is imbalanced in favour of one or more classes (like *mall.cz* da
 Those can be automatically computed and assigned to corresponding json configuration file by following invocation
 
 ```shell script
+# current directory is expected to be "src"
 python calculate_class_weight.py --dataset_full_path="{PATH_TO_DATASET_FILE}" --config_path="{PATH_TO_JSON_CONFIG}"
 ```
 
@@ -88,6 +132,7 @@ In order to evaluate dataset, you need to define config similar to the ones in *
 Then the dataset can be evaluated using following command:
 
 ```shell script
+# current directory is expected to be "src"
 python evaluate.py --dataset="{DATASET_NAME}"
 ```
 

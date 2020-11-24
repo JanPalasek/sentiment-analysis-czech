@@ -144,6 +144,7 @@ dmypy.json
 .idea/
 out/
 logs
+/data
 
 src/train_cluster.sh
 src/evaluate_cluster.sh
