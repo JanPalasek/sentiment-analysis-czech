@@ -1,0 +1,23 @@
+{
+  "model": {
+    "classes": 3,
+    "dropout": 0.5,
+    "max_sentence_len": 128,
+    "model_config_name": "xlm_roberta"
+  },
+  "path": "../data/custom",
+  "train": {
+    "batch_size": 16,
+    "buffer_size": 1000,
+    "class_weight": {
+      "0": 1,
+      "1": 1,
+      "2": 1
+    },
+    "epochs": 30,
+    "optimizer": {
+      "epsilon": 1e-08,
+      "learning_rate": 1e-05
+    }
+  }
+}

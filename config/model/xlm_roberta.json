@@ -1,0 +1,10 @@
+{
+  "pretrained_name": "jplu/tf-xlm-roberta-base",
+  "dropout": 0.5,
+  "tokens": {
+    "pad": {
+      "id": 1,
+      "value": "<pad>"
+    }
+  }
+}
