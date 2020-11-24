@@ -23,16 +23,3 @@ def preprocess(in_csv_paths, out_dir_path, val_split, test_split):
     write_into_file(val_dataset, out_path=os.path.join(out_dir_path, "data_val.csv"))
     write_into_file(test_dataset, out_path=os.path.join(out_dir_path, "data_test.csv"))
 
-
-if __name__ == "__main__":
-    random.seed(42)
-
-    out_dir_path = "../../data/all"
-    in_csv_paths = [
-        "../../data/facebook/data_full.csv",
-        "../../data/csfd/data_full.csv",
-        "../../data/mall/data_full.csv"
-    ]
-
-    preprocess(in_csv_paths, out_dir_path, val_split=0.15, test_split=0.15)
-

@@ -86,7 +86,7 @@ if __name__ == "__main__":
 
     batch_size, buffer_size = train_config["batch_size"], train_config["buffer_size"]
 
-    class_weight = {int(k): v for k, v in train_config["calculate_class_weight.py"].items()}
+    class_weight = {int(k): v for k, v in train_config["class_weight"].items()}
 
     loss = tf.keras.losses.CategoricalCrossentropy(from_logits=False)
     metrics = [

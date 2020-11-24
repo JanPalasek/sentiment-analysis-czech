@@ -100,7 +100,7 @@ if __name__ == "__main__":
     optimizer_config = train_config["optimizer"]
     learning_rate, epsilon = optimizer_config["learning_rate"], optimizer_config["epsilon"]
 
-    class_weight = {int(k): v for k, v in train_config["calculate_class_weight.py"].items()}
+    class_weight = {int(k): v for k, v in train_config["class_weight"].items()}
 
     optimizer = tf.keras.optimizers.Adam(learning_rate, epsilon)
     loss = tf.keras.losses.CategoricalCrossentropy(from_logits=False)
