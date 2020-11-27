@@ -4,7 +4,7 @@ to perform them on other languages. I decided to test it. This project performs 
 sentences into three categories: negative, positive and neutral, using the recent, multi-lingual model: [xlm-roberta base](https://arxiv.org/pdf/1911.02116.pdf).
 
 The sentiment analysis is done on datasets from [https://github.com/kysely/sentiment-analysis-czech](https://github.com/kysely/sentiment-analysis-czech). The
-benchmarks will be done in the corresponding article soon.
+benchmarks and analysis can be found in the corresponding [article](http://janpalasek.com/sentiment-analysis-czech.html).
 
 <table>
     <tr>
@@ -71,7 +71,7 @@ There are 5 datasets available:
 2. *facebook* - contains list of facebook comments,
 3. *mall* - contains list of mall.cz reviews,
 4. *all* - contains merged datasets from *csfd, facebook* and *mall*,
-5. *handpicked_test* - contains list of handpicked tests used for analysis article.
+5. *handpicked_test* - contains list of handpicked tests.
 
 Those datasets are expected to be in *data* directory. If need be, download it from the latest release. In the directories, there also are predefined train/test/validation splits in order for the replication analysis to be easier (since random data generation works differently on different OS even using the same seed).
 
