@@ -127,7 +127,7 @@ if __name__ == "__main__":
     predictions = model.predict(test_dataset.map(lambda x, y: x).batch(batch_size))
 
     with open(os.path.join(log_dir, "pred.csv"), "w") as csv_file:
-        writer = csv.DictWriter(csv_file, fieldnames=["text", "target_label", "pred_label"])
+        writer = csv.DictWriter(csv_file, fieldnames=["text", "target_label", "pred_label", "prediction"])
         writer.writeheader()
 
         for (input, target), prediction in zip(test_dataset, predictions):
@@ -137,5 +137,6 @@ if __name__ == "__main__":
             target_label = np.argmax(target_np)
             prediction_label = np.argmax(prediction)
 
-            writer.writerow({"text": text, "target_label": target_label, "pred_label": prediction_label})
+            writer.writerow({"text": text, "target_label": target_label,
+                             "pred_label": prediction_label, "prediction": prediction})
 

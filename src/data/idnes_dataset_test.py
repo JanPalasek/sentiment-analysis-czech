@@ -5,7 +5,7 @@ import ijson
 from src.data.utils import write_into_file, train_val_test_split
 
 
-def preprocess(dir_path, val_split, test_split, max_sentences=100000):
+def preprocess(dir_path, val_split, test_split, max_sentences=10000):
     dataset = []
     with open(os.path.join(dir_path, "data.json"), "r") as file:
         data = ijson.parse(file)
@@ -19,7 +19,7 @@ def preprocess(dir_path, val_split, test_split, max_sentences=100000):
                 dataset.append((v, 0))
 
                 i += 1
-    print(dataset[:10])
+
     random.shuffle(dataset)
 
     train_dataset, val_dataset, test_dataset = train_val_test_split(dataset, val_split, test_split)
