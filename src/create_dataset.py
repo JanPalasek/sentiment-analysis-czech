@@ -3,6 +3,7 @@ import random
 import data.review_dataset
 import data.facebook_dataset
 import data.all_dataset
+import data.idnes_dataset_test
 
 
 if __name__ == "__main__":
@@ -29,6 +30,8 @@ if __name__ == "__main__":
         data.all_dataset.preprocess(in_csv_paths, dir_path, val_split=0.15, test_split=0.15)
     elif args.dataset == "handpicked_test":
         data.review_dataset.preprocess(dir_path, val_split=0, test_split=1)
+    elif args.dataset == "idnes_test":
+        data.idnes_dataset_test.preprocess(dir_path, val_split=0, test_split=1)
     else:
         data.facebook_dataset.preprocess(dir_path, val_split=0.15, test_split=0.15)
 
